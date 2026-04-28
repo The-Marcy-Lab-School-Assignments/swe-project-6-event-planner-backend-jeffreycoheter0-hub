@@ -1,0 +1,1 @@
+require('dotenv').config(); // loads every variable into "process.env" before any code runs
