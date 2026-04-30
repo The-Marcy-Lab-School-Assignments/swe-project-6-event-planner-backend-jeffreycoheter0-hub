@@ -71,14 +71,6 @@ const seed = async () => {
 
   const [animeNYC, nycc, fifaWorldCup] = events;
 
-  console.log({
-    jeffrey: jeffrey.user_id,
-    chris: chris.user_id,
-    denisse: denisse.user_id,
-    animeNYC: animeNYC.event_id,
-    nycc: nycc.event_id,
-    fifa: fifaWorldCup.event_id
-  });
   // Each pair below must be unique.
   await pool.query(`
     INSERT INTO rsvps (user_id, event_id) VALUES
