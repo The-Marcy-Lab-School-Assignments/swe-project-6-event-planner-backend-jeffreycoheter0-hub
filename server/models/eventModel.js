@@ -18,7 +18,7 @@ module.exports.list = async () => {
     INNER JOIN users ON events.user_id = users.user_id
     LEFT JOIN rsvps ON events.event_id = rsvps.event_id
     GROUP BY events.event_id, users.user_id
-    ORDER BY rsvp_count DESC
+    ORDER BY rsvp_count ASC
     `;
     const { rows } = await pool.query(query);
     return rows;

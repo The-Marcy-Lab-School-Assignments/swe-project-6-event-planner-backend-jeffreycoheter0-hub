@@ -37,3 +37,12 @@ module.exports.validatePassword = async (username, password) => {
     if (!isValid) return null;
     return user; // intentional flaw: includes password_hash
 };
+
+// DELETE: Deletes the user
+module.exports.delete = async (rsvp_id) => {
+    const query = `
+    DELETE FROM users
+    WHERE user_id = $1
+    `;
+    await pool.query(query, [rsvp_id]);
+};

@@ -26,6 +26,18 @@ module.exports.list = async () => {
     return rows;
 };
 
+// Return a single rsvp row (including user_id for ownership checks)
+// if the rsvp exists return it, otherwise return NULL
+module.exports.find = async (rsvp_id) => {
+    const query = `
+    SELECT *
+    FROM rsvps
+    WHERE rsvp_id = $1
+    `;
+    const { rows } = await pool.query(query, [rsvp_id]);
+    return rows[0] || null;
+};
+
 // DELETE: Deletes the rsvp (the user will not be attending the event anymore)
 module.exports.delete = async (rsvp_id) => {
     const query = `
