@@ -38,6 +38,20 @@ module.exports.validatePassword = async (username, password) => {
     return user; // intentional flaw: includes password_hash
 };
 
+module.exports.updatePassword = async (user_id, hashedPassword) => {
+    const { rows } = await pool.query(
+        `
+        UPDATE users
+        SET password_hash = $1
+        WHERE user_id = $2
+        RETURNING user_id, username;
+        `,
+        [hashedPassword, user_id]
+    );
+
+    return rows[0]; // will be undefined if user not found
+};
+
 // DELETE: Deletes the user
 module.exports.delete = async (rsvp_id) => {
     const query = `
